@@ -24,7 +24,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim' => replaced with fzf
 Plug 'vim-scripts/mru.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'SirVer/ultisnips'
@@ -413,9 +413,26 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
+
+"███████╗███████╗███████╗
+"██╔════╝╚════██║██╔════╝
+"█████╗░░░░███╔═╝█████╗░░
+"██╔══╝░░██╔══╝░░██╔══╝░░
+"██║░░░░░███████╗██║░░░░░
+"╚═╝░░░░░╚══════╝╚═╝░░░░░
 "Search in the current directory
 command! -bang -nargs=* PRg
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+
+nnoremap <silent> <C-p> :Files<Cr>
+nnoremap <silent> <C-b> :Buffers<Cr>
+nnoremap <silent> <C-p>l :Rg<Cr>
+
+if has("nvim")
+    " Escape inside a FZF terminal window should exit the terminal window
+    " rather than going into the terminal's normal mode.
+    autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
+endif
 
 
 "░██████╗░██╗░░░██╗██╗
@@ -592,29 +609,6 @@ if has("win16") || has("win32")
 else
     let g:yankring_history_dir = '~/.vim/temp_dirs/'
 endif
-
-"░█████╗░████████╗██████╗░██╗░░░░░░░░░░░██████╗░
-"██╔══██╗╚══██╔══╝██╔══██╗██║░░░░░░░░░░░██╔══██╗
-"██║░░╚═╝░░░██║░░░██████╔╝██║░░░░░█████╗██████╔╝
-"██║░░██╗░░░██║░░░██╔══██╗██║░░░░░╚════╝██╔═══╝░
-"╚█████╔╝░░░██║░░░██║░░██║███████╗░░░░░░██║░░░░░
-"░╚════╝░░░░╚═╝░░░╚═╝░░╚═╝╚══════╝░░░░░░╚═╝░░░░░
-
-let g:ctrlp_working_path_mode = 0
-
-let g:ctrlp_map = '<c-f>'
-map <leader>j :CtrlP<cr>
-map <c-b> :CtrlPBuffer<cr>
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-let g:ctrlp_show_hidden = 1
-
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
 
 "██╗░░░██╗██╗███╗░░░███╗  ░██████╗░██████╗░███████╗██████╗░
 "██║░░░██║██║████╗░████║  ██╔════╝░██╔══██╗██╔════╝██╔══██╗
