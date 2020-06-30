@@ -756,6 +756,12 @@ set clipboard+=unnamed " Yanks go on clipboard instead.
 
 " relative line
 set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 
 
 "███████╗░█████╗░░██████╗██╗░░░██╗███╗░░░███╗░█████╗░████████╗██╗░█████╗░███╗░░██╗
@@ -874,3 +880,5 @@ let g:blamer_show_in_visual_modes = 0
 "╚═╝░░╚═╝╚═╝░░╚═╝╚═╝╚═╝░░╚══╝╚═════╝░░╚════╝░░░░╚═╝░░░╚═╝░░
 
 let g:rainbow_active = 1
+
+
