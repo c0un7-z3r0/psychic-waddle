@@ -3,13 +3,19 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 
-
 "██████╗░██╗░░░░░██╗░░░██╗░██████╗░██╗███╗░░██╗░██████╗
 "██╔══██╗██║░░░░░██║░░░██║██╔════╝░██║████╗░██║██╔════╝
 "██████╔╝██║░░░░░██║░░░██║██║░░██╗░██║██╔██╗██║╚█████╗░
 "██╔═══╝░██║░░░░░██║░░░██║██║░░╚██╗██║██║╚████║░╚═══██╗
 "██║░░░░░███████╗╚██████╔╝╚██████╔╝██║██║░╚███║██████╔╝
 "╚═╝░░░░░╚══════╝░╚═════╝░░╚═════╝░╚═╝╚═╝░░╚══╝╚═════╝░
+
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
 
 call plug#begin('~/.vim/plugged')
 
@@ -35,7 +41,6 @@ Plug 'AndrewRadev/tagalong.vim'
 
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'scrooloose/nerdtree'
-" Plug 'ctrlpvim/ctrlp.vim' => replaced with fzf
 Plug 'vim-scripts/mru.vim'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'editorconfig/editorconfig-vim'
@@ -66,14 +71,27 @@ Plug 'airblade/vim-gitgutter'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'mhinz/vim-startify'
 Plug 'frazrepo/vim-rainbow'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dkprice/vim-easygrep'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'apzelos/blamer.nvim'
 Plug 'raimondi/delimitmate'
+Plug 'sjl/vitality.vim'
+
+
+
+" COC Extensions
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+Plug 'iamcco/coc-spell-checker', {'do': 'yarn install --frozen-lockfile'}
+
+
 call plug#end()
 
 "░██████╗░███████╗███╗░░██╗███████╗██████╗░░█████╗░██╗░░░░░
@@ -81,7 +99,7 @@ call plug#end()
 "██║░░██╗░█████╗░░██╔██╗██║█████╗░░██████╔╝███████║██║░░░░░
 "██║░░╚██╗██╔══╝░░██║╚████║██╔══╝░░██╔══██╗██╔══██║██║░░░░░
 "╚██████╔╝███████╗██║░╚███║███████╗██║░░██║██║░░██║███████╗
-"░╚═════╝░╚══════╝╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝
+"░╚═════╝░╚══════╝╚╝░░╚══╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝
 
 " Sets how many lines of history VIM has to remember
 set history=700
@@ -99,8 +117,6 @@ au FocusGained,BufEnter * :checktime
 " like <leader>w saves the current file
 let mapleader = " "
 let g:mapleader = " "
-
-
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
@@ -839,6 +855,7 @@ let g:solarized_termtrans = 1
 
 let g:hanami_open_strategy = 'vsplit'
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "███╗░░██╗██╗░░░██╗██╗███╗░░░███╗  ████████╗███████╗██████╗░███╗░░░███╗██╗███╗░░██╗░█████╗░██╗░░░░░
 "████╗░██║██║░░░██║██║████╗░████║  ╚══██╔══╝██╔════╝██╔══██╗████╗░████║██║████╗░██║██╔══██╗██║░░░░░
