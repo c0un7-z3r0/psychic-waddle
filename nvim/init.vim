@@ -22,7 +22,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Theme
 Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " Search
 Plug 'rking/ag.vim'
