@@ -13,30 +13,44 @@ filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
 
+" GOlang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Bottom Bar
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Theme
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'danilamihailov/beacon.nvim'
+" Plug 'ryanoasis/vim-devicons'
+
+" Search
 Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'vim-scripts/bufexplorer.zip'
+
+" HTML
 Plug 'AndrewRadev/tagalong.vim'
+
+
+Plug 'vim-scripts/bufexplorer.zip'
 Plug 'scrooloose/nerdtree'
 " Plug 'ctrlpvim/ctrlp.vim' => replaced with fzf
 Plug 'vim-scripts/mru.vim'
+Plug 'danilamihailov/beacon.nvim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
+
+" Typescript
 Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
+
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-repeat'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
@@ -52,7 +66,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'mhinz/vim-startify'
 Plug 'frazrepo/vim-rainbow'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -631,6 +644,15 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
+" Open nerdtree automatically
+" autocmd vimenter * NERDTree
+
+" close nerdtree on open of file
+let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
 
 "███╗░░██╗███████╗██████╗░██████╗░  ░█████╗░░█████╗░███╗░░░███╗███╗░░░███╗███████╗███╗░░██╗████████╗███████╗██████╗░
 "████╗░██║██╔════╝██╔══██╗██╔══██╗  ██╔══██╗██╔══██╗████╗░████║████╗░████║██╔════╝████╗░██║╚══██╔══╝██╔════╝██╔══██╗
@@ -848,9 +870,7 @@ let g:hanami_open_strategy = 'vsplit'
       endif
   endfunction
   nnoremap <leader>tt :call TermToggle()<CR>
-  inoremap <leader>tt :call TermToggle()<CR>
   tnoremap <leader>tt <C-\><C-n>:call TermToggle()<CR>
-
 
 
 
